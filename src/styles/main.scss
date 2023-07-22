@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --bs-font-sans-serif: "Inter" !important;
+}
+
+$theme-colors: (
+  "light-500": #f3f4f9,
+  "dark-500": #1a1a1a,
+);
+
+@each $color, $value in $theme-colors {
+  .bg-#{$color} {
+    background-color: $value;
+  }
+  .text-#{$color} {
+    color: $value !important;
+  }
+}
