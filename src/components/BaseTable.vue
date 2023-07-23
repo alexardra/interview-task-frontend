@@ -9,7 +9,13 @@
     </thead>
     <tbody>
       <tr v-for="(row, index) in rows" :key="index">
-        <td class="px-4 py-3">{{ row }}</td>
+        <td
+          @click="selectRow(index)"
+          class="px-4 py-3 text-main-lighten-1"
+          :class="{ 'text-main-primary': selectedIndex === index }"
+        >
+          {{ row }}
+        </td>
       </tr>
     </tbody>
   </table>
@@ -18,5 +24,21 @@
 <script setup lang="ts">
 defineProps<{
   rows: string[]
+  selectedIndex?: number
 }>()
+
+const emit = defineEmits<{
+  (e: "selected", index: number): void
+}>()
+
+const selectRow = (index: number) => {
+  emit("selected", index)
+}
 </script>
+
+<style scoped>
+table td:hover {
+  background-color: #f8f8fb;
+  cursor: pointer;
+}
+</style>

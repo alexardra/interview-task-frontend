@@ -1,5 +1,9 @@
 <template>
-  <button class="btn btn-lg btn-primary" @click="selectBusLine">
+  <button
+    class="btn btn-lg btn-primary border-0 outline-0"
+    :class="{ 'bg-main-primary-active': selected }"
+    @click="selectBusLine"
+  >
     {{ line }}
   </button>
 </template>
@@ -9,6 +13,7 @@ import { useStore } from "vuex"
 
 const props = defineProps<{
   line: number
+  selected: boolean
 }>()
 const store = useStore()
 

@@ -18,7 +18,7 @@ type StateShape = {
   schedule: Map<number, Map<string, { order: number; times: string[] }>>
   busLineList: number[]
   selectedBusLine: number | null
-  selectedBusStopName: string | null
+  selectedBusStop: IBusStop | null
 }
 
 export default createStore({
@@ -28,7 +28,7 @@ export default createStore({
     schedule: new Map(),
 
     selectedBusLine: null,
-    selectedBusStopName: null,
+    selectedBusStop: null,
   },
   getters: {
     busLines(state) {
@@ -37,8 +37,8 @@ export default createStore({
     selectedBusLine(state) {
       return state.selectedBusLine
     },
-    selectedBusStopName(state) {
-      return state.selectedBusStopName
+    selectedBusStop(state) {
+      return state.selectedBusStop
     },
     selectedBusLineStops(state) {
       if (state.selectedBusLine === null || state.actionState !== "initialised")
@@ -62,12 +62,12 @@ export default createStore({
       return sortedStops
     },
     selectedBusStopTimes(state) {
-      if (state.selectedBusLine === null || state.selectedBusStopName === null)
+      if (state.selectedBusLine === null || state.selectedBusStop === null)
         return null
 
       return state.schedule
         .get(state.selectedBusLine)
-        ?.get(state.selectedBusStopName)?.times
+        ?.get(state.selectedBusStop.name)?.times
     },
   },
   mutations: {
@@ -108,8 +108,8 @@ export default createStore({
     setSelectedBusLine(state, line: number) {
       state.selectedBusLine = line
     },
-    setSelectedBusStopName(state, stopName: string) {
-      state.selectedBusStopName = stopName
+    setSelectedBusStop(state, stop: IBusStop) {
+      state.selectedBusStop = stop
     },
   },
   actions: {
@@ -140,9 +140,8 @@ export default createStore({
     },
     selectBusStop(context, busStop: IBusStop) {
       if (context.state.selectedBusLine !== null) {
-        context.commit("setSelectedBusStopName", busStop.name)
+        context.commit("setSelectedBusStop", busStop)
       }
     },
   },
-  // modules: {},
 })

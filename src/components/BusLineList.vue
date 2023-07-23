@@ -3,7 +3,12 @@
     <h3 class="text-main fs-sm mb-0">Select Bus Line</h3>
 
     <div class="py-4 d-flex flex-wrap gap-2">
-      <BusLineItem v-for="line in lines" :key="line" :line="line" />
+      <BusLineItem
+        v-for="line in lines"
+        :key="line"
+        :line="line"
+        :selected="selectedBusLine === line"
+      />
     </div>
   </div>
 </template>
@@ -16,4 +21,5 @@ import { useStore } from "vuex"
 const store = useStore()
 
 const lines = computed(() => store.getters.busLines)
+const selectedBusLine = computed(() => store.getters.selectedBusLine)
 </script>
