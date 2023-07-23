@@ -5,7 +5,7 @@
   <div class="row g-0 mt-3 d-md-flex flex-md-fill">
     <div class="col-md bg-white mb-2 mb-md-0 me-md-2 rounded-1 h-100">
       <BaseTablePlaceholder
-        v-if="!isBusLineSelected"
+        v-if="!selectedBusLine"
         text="Please select the bus line first"
       />
       <BusStopsTable v-else :stops="selectedBusLineStops" />
@@ -25,6 +25,6 @@ import { useStore } from "vuex"
 import { computed } from "vue"
 const store = useStore()
 
-const isBusLineSelected = computed(() => store.getters.isBusLineSelected)
+const selectedBusLine = computed(() => store.getters.selectedBusLine)
 const selectedBusLineStops = computed(() => store.getters.selectedBusLineStops)
 </script>

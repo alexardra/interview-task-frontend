@@ -1,17 +1,17 @@
 <template>
-  <div class="w-100 vh-100 overflow-hidden bg-light-500">
+  <div class="w-100 min-vh-100 overflow-auto bg-light-500">
     <MainLayout>
       <RouterView />
     </MainLayout>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import MainLayout from "@/layouts/MainLayout.vue"
 
-export default {
-  components: {
-    MainLayout,
-  },
-}
+import { useStore } from "vuex"
+
+const store = useStore()
+
+store.dispatch("init")
 </script>
