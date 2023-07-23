@@ -1,9 +1,9 @@
 <template>
-  <div class="container-md h-100 py-3 px-4 d-flex flex-column gap-4">
+  <div class="container-md vh-100 py-3 px-4 d-flex flex-column gap-4">
     <h1 class="text-dark-500 m-0 p-0 h3">Timetable</h1>
     <div class="d-flex h-100 flex-column gap-3 align-items-start">
       <NavBar :links="AppRoutes" />
-      <div class="w-100 h-100">
+      <div class="container-fluid p-0 h-100 d-flex flex-column">
         <slot></slot>
       </div>
     </div>
