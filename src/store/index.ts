@@ -1,7 +1,7 @@
-import axios from "axios"
 import { createStore } from "vuex"
 import { IBusLine, IBusStop } from "@/types"
 import { dateComparer, sortedPush, unique } from "@/utils"
+import { getStops } from "@/client/stops"
 
 export const StoreActionStates = [
   "none",
@@ -83,6 +83,21 @@ export default createStore({
       })
       return stops
     },
+    isNoneState(state) {
+      return state.actionState === "none"
+    },
+    isPendingState(state) {
+      return state.actionState === "pending"
+    },
+    isErrorState(state) {
+      return state.actionState === "error"
+    },
+    isLoadedState(state) {
+      return state.actionState === "loaded"
+    },
+    isInitialisedState(state) {
+      return state.actionState === "initialised"
+    },
   },
   mutations: {
     setActionState(state, actionState: StoreActionState) {
@@ -121,6 +136,7 @@ export default createStore({
     },
     setSelectedBusLine(state, line: number) {
       state.selectedBusLine = line
+      state.selectedBusStop = null
     },
     setSelectedBusStop(state, stop: IBusStop) {
       state.selectedBusStop = stop
@@ -131,7 +147,8 @@ export default createStore({
       context.commit("setActionState", "pending")
 
       try {
-        const response = await axios.get("http://localhost:3000/stops")
+        const response = await getStops()
+
         const schedule = response.data as IBusLine[]
 
         const busLineList = unique(
@@ -140,8 +157,6 @@ export default createStore({
 
         context.commit("setBusLinesList", busLineList)
         context.commit("setActionState", "loaded")
-
-        context.commit("setActionState", "initialised")
 
         context.commit("setStops", schedule)
         context.commit("setActionState", "initialised")

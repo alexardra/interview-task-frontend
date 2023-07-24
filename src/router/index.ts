@@ -4,8 +4,8 @@ import BusLinesPage from "@/views/BusLinesPage.vue"
 export const AppRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "Bus Lines",
-    component: () => BusLinesPage,
+    name: "BusLines",
+    component: BusLinesPage,
   },
   {
     path: "/stops",
@@ -16,7 +16,18 @@ export const AppRoutes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes: AppRoutes,
+  routes: [
+    ...AppRoutes,
+    {
+      path: "/error",
+      name: "Error",
+      component: () => import("@/views/ErrorPage.vue"),
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      component: () => import("@/views/NotFoundPage.vue"),
+    },
+  ],
 })
 
 export default router

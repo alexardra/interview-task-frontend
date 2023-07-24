@@ -35,16 +35,16 @@ $theme-colors: (
   font-size: $font-size-lg !important;
 }
 
+.btn-primary.btn:hover {
+  background-color: $primary-hover !important;
+}
+
 .btn-primary.btn-check:checked + .btn-primary.btn,
 :not(.btn-check) + .btn-primary.btn:active,
 .btn-primary.btn:first-child:active,
 .btn-primary.btn.active,
 .btn-primary.btn.show {
-  background-color: $primary-active;
-}
-
-.btn-primary.btn:hover {
-  background-color: $primary-hover;
+  background-color: $primary-active !important;
 }
 
 @import "bootstrap";
