@@ -69,6 +69,20 @@ export default createStore({
         .get(state.selectedBusLine)
         ?.get(state.selectedBusStop.name)?.times
     },
+    busStops(state) {
+      const stops = [] as IBusStop[]
+
+      state.schedule.forEach((stopMap) => {
+        stopMap.forEach((stopData, stopName) => {
+          sortedPush(
+            stops,
+            { name: stopName, order: stopData.order } as IBusStop,
+            (a, b) => b.order - a.order
+          )
+        })
+      })
+      return stops
+    },
   },
   mutations: {
     setActionState(state, actionState: StoreActionState) {
