@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white p-4 rounded-1 d-flex flex-column gap-2">
+  <div class="bg-white p-4 pb-0 rounded-1 d-flex flex-column gap-2">
     <h3 class="text-main fs-sm mb-0">Select Bus Line</h3>
 
     <div class="py-4 d-flex flex-wrap gap-2">
