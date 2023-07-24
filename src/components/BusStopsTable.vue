@@ -10,13 +10,19 @@
       :rows="rows"
       :selectedIndex="selectedIndex"
     >
-      <template #title> Bus Stops </template>
+      <template #title>
+        <div class="d-flex align-items-center gap-1">
+          <span>Bus Stops</span>
+          <SortIcon />
+        </div>
+      </template>
     </BaseTable>
   </div>
 </template>
 
 <script setup lang="ts">
 import BaseTable from "./BaseTable.vue"
+import SortIcon from "./SortIcon.vue"
 import { computed, toRefs } from "vue"
 import { IBusStop } from "@/types"
 import { useFormatBusName } from "@/composables/useFormatBusName"

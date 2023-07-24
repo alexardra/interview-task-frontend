@@ -1,48 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
+@import "./variables.scss";
+
 :root {
   --bs-font-sans-serif: "Inter" !important;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap");
-@import "bootstrap/dist/css/bootstrap.min.css";
-
 $theme-colors: (
-  "light-500": #f3f4f9,
-  "main-lighten-1": #33373c,
-  "main-lighten-2": #63666e,
-  "main-lighten-3": #9a9da4,
-  "main-lighten-bg-1": #f8f8fb,
-  "main": #1a1a1a,
-  "main-primary": #1952e1,
-  "main-primary-hover": #013dd6,
-  "main-primary-active": #2e3e6e,
+  "primary": $primary,
+  "primary-hover": $primary-hover,
+  "primary-active": $primary-active,
+  "main": $main,
+  "light-bg": $light-bg,
+  "lighten-1": $lighten-1,
+  "lighten-2": $lighten-2,
+  "lighten-3": $lighten-3,
+  "lighten-bg-1": $lighten-bg-1,
+  "darker-bg": $darker-bg,
+  "white": $white,
 );
 
-@each $color, $value in $theme-colors {
-  .bg-#{$color} {
-    background-color: $value !important;
-  }
-  .text-#{$color} {
-    color: $value !important;
-  }
-}
-
-$font-size-base: 1rem; // Assumes the browser default, typically `16px`
-$font-size-xs: $font-size-base * 0.75;
-$font-size-sm: $font-size-base * 0.875;
-$font-size-lg: $font-size-base * 1.25;
-
 .fs-base {
-  font-size: $font-size-base;
+  font-size: $font-size-base !important;
 }
 
 .fs-xs {
-  font-size: $font-size-sm;
+  font-size: $font-size-xs !important;
 }
 
 .fs-sm {
-  font-size: $font-size-sm;
+  font-size: $font-size-sm !important;
 }
 
 .fs-lg {
-  font-size: $font-size-lg;
+  font-size: $font-size-lg !important;
 }
+
+.btn-primary.btn-check:checked + .btn-primary.btn,
+:not(.btn-check) + .btn-primary.btn:active,
+.btn-primary.btn:first-child:active,
+.btn-primary.btn.active,
+.btn-primary.btn.show {
+  background-color: $primary-active;
+}
+
+.btn-primary.btn:hover {
+  background-color: $primary-hover;
+}
+
+@import "bootstrap";

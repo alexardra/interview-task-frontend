@@ -1,7 +1,7 @@
 <template>
   <button
-    class="btn btn-lg btn-primary border-0 outline-0"
-    :class="{ 'bg-main-primary-active': selected }"
+    class="btn btn-lg btn-primary fs-xs border-0 outline-0"
+    :class="{ active: selected }"
     @click="selectBusLine"
   >
     {{ line }}
@@ -21,13 +21,3 @@ const selectBusLine = () => {
   store.dispatch("selectBusLine", { line: props.line })
 }
 </script>
-
-<style scoped>
-button {
-  font-size: 0.75rem;
-}
-
-button:hover {
-  background-color: #0f3bb4;
-}
-</style>

@@ -13,6 +13,7 @@ import BusStopsTable from "@/components/BusStopsTable.vue"
 import { ref, computed, onMounted } from "vue"
 import { useStore } from "vuex"
 import { IBusStop } from "@/types"
+import { search } from "@/utils"
 
 const store = useStore()
 const busStops = computed(() => store.getters.busStops as IBusStop[])
@@ -24,8 +25,9 @@ onMounted(() => {
 })
 
 const filterStops = (query: string) => {
-  filteredBusStops.value = busStops.value.filter((stop) =>
-    stop.name.includes(query)
-  )
+  /*
+   * Abstracting away search - for possibility of future improvement
+   */
+  filteredBusStops.value = search(busStops.value, query, (item) => item.name)
 }
 </script>

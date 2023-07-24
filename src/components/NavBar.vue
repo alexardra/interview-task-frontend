@@ -5,12 +5,11 @@
         v-for="link in links"
         :key="`nav-item-${link.path}`"
         class="nav-item fs-sm"
-        activeClass="border-bottom border-2 border-primary"
       >
         <RouterLink
           :to="link.path"
-          class="nav-link px-4 py-3 text-main-lighten-3"
-          activeClass="border-bottom border-2 border-primary text-main-lighten-1"
+          class="nav-link px-4 py-3 text-lighten-3"
+          activeClass="border-bottom border-2 border-primary"
         >
           {{ link.name }}
         </RouterLink>
@@ -26,3 +25,12 @@ defineProps<{
   links: RouteRecordRaw[]
 }>()
 </script>
+
+<style scoped lang="scss">
+@import "@/styles/variables.scss";
+
+.router-link-active,
+.router-link-exact-active {
+  color: $lighten-1 !important;
+}
+</style>
