@@ -3,6 +3,7 @@
     class="btn btn-lg btn-primary fs-xs border-0 outline-0"
     :class="{ active: selected }"
     @click="selectBusLine"
+    :disabled="disabled"
   >
     {{ line }}
   </button>
@@ -13,7 +14,8 @@ import { useStore } from "vuex"
 
 const props = defineProps<{
   line: number
-  selected: boolean
+  selected?: boolean
+  disabled?: boolean
 }>()
 const store = useStore()
 

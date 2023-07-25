@@ -5,13 +5,13 @@ import { useStore } from "vuex"
 export function useStoreInit() {
   const router = useRouter()
   const store = useStore()
-  const isNoneState = computed(() => store.getters.isNoneState)
+  const isSetupState = computed(() => store.getters.isSetupState)
   const isErrorState = computed(() => store.getters.isErrorState)
 
   watch(
-    isNoneState,
+    isSetupState,
     () => {
-      if (isNoneState.value) {
+      if (isSetupState.value) {
         store.dispatch("init")
       }
     },

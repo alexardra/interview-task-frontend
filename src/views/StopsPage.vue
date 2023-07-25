@@ -2,8 +2,19 @@
   <MainLayout>
     <div class="row g-0 d-md-flex flex-md-fill" style="max-height: 675px">
       <div class="col-md bg-white rounded-1 h-100">
-        <BaseSearchBar @changed="filterStops" />
-        <BusStopsTable :stops="filteredBusStops" />
+        <template v-if="!isInitialised">
+          <div
+            class="w-100 h-100 d-flex align-items-center justify-content-center"
+          >
+            <div
+              class="w-50 placeholder placeholder-xs placeholder-glow bg-lighten-2"
+            ></div>
+          </div>
+        </template>
+        <template v-else>
+          <BaseSearchBar @changed="filterStops" />
+          <BusStopsTable :stops="filteredBusStops" />
+        </template>
       </div>
     </div>
   </MainLayout>
@@ -18,14 +29,15 @@ import { useStore } from "vuex"
 import { IBusStop } from "@/types"
 import { search } from "@/utils"
 import { useStoreInit } from "@/composables/useStoreInit"
+import { useStoreState } from "@/composables/useStoreState"
 
 useStoreInit()
 
 const store = useStore()
-const isInitialised = computed(() => store.getters.isInitialisedState)
-
 const busStops = computed(() => store.getters.busStops as IBusStop[])
 const filteredBusStops = ref<IBusStop[]>([])
+
+const { isInitialised } = useStoreState()
 
 watch(
   isInitialised,

@@ -4,8 +4,8 @@ import { dateComparer, sortedPush, unique } from "@/utils"
 import { getStops } from "@/client/stops"
 
 export const StoreActionStates = [
-  "none",
-  "pending", // fetching data
+  "setup",
+  "loading", // fetching data
   "error", // error fetching data
   "loaded", // raw data in store, bus lines accessible
   "initialised", // structured data accessible
@@ -23,7 +23,7 @@ type StateShape = {
 
 export default createStore({
   state: <StateShape>{
-    actionState: "none",
+    actionState: "setup",
     busLineList: [],
     schedule: new Map(),
 
@@ -83,11 +83,11 @@ export default createStore({
       })
       return stops
     },
-    isNoneState(state) {
-      return state.actionState === "none"
+    isSetupState(state) {
+      return state.actionState === "setup"
     },
-    isPendingState(state) {
-      return state.actionState === "pending"
+    isLoadingState(state) {
+      return state.actionState === "loading"
     },
     isErrorState(state) {
       return state.actionState === "error"
@@ -144,7 +144,7 @@ export default createStore({
   },
   actions: {
     async init(context) {
-      context.commit("setActionState", "pending")
+      context.commit("setActionState", "loading")
 
       try {
         const response = await getStops()

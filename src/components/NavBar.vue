@@ -7,12 +7,16 @@
         class="nav-item fs-sm"
       >
         <RouterLink
-          :to="link.path"
+          v-if="isLoaded || isInitialised"
           class="nav-link px-4 py-3 text-lighten-3"
           activeClass="border-bottom border-2 border-primary"
+          :to="link.path"
         >
           {{ link.name }}
         </RouterLink>
+        <span v-else class="nav-link px-4 py-3 text-lighten-3">
+          {{ link.name }}
+        </span>
       </li>
     </ul>
   </nav>
@@ -20,6 +24,9 @@
 
 <script setup lang="ts">
 import { RouteRecordRaw, RouterLink } from "vue-router"
+import { useStoreState } from "@/composables/useStoreState"
+
+const { isLoaded, isInitialised } = useStoreState()
 
 defineProps<{
   links: RouteRecordRaw[]
