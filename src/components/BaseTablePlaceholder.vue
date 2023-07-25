@@ -1,5 +1,7 @@
 <template>
-  <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+  <div
+    class="w-100 h-100 d-flex justify-content-center align-items-center rounded border-2 border-dashed border-lighten-3 p-4 p-md-0"
+  >
     <div
       v-if="isLoading"
       class="w-50 placeholder placeholder-sm placeholder-glow bg-lighten-2"

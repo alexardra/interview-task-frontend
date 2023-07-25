@@ -1,5 +1,5 @@
 <template>
-  <form class="p-2">
+  <form class="p-2 col col-md-5 col-lg-4">
     <div class="input-group">
       <input
         @input="(e) => updateQuery(e as InputEvent)"

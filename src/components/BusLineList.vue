@@ -13,6 +13,11 @@
         ></div>
       </div>
     </template>
+
+    <template v-else-if="lines.length === 0">
+      <h3 class="text-main fs-sm mb-4">No bus lines available at the moment</h3>
+    </template>
+
     <template v-else>
       <h3 class="text-main fs-sm mb-0">Select Bus Line</h3>
 

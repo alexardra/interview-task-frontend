@@ -1,7 +1,6 @@
 <template>
   <div
     class="bg-white rounded-1 d-flex flex-column gap-2 h-100 overflow-y-auto"
-    style="max-height: 50vh"
   >
     <h3 class="text-main fs-sm mb-0 px-4 pt-4">
       Bus Stop: {{ useFormatBusName(stop).value }}

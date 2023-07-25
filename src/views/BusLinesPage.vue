@@ -3,7 +3,7 @@
     <div class="row g-0">
       <BusLineList />
     </div>
-    <div class="row g-0 mt-3 d-md-flex flex-md-fill" style="max-height: 450px">
+    <div class="row g-0 mt-3 d-md-flex flex-md-fill h-container h-md-container">
       <div class="col-md bg-white mb-2 mb-md-0 me-md-2 rounded-1 h-100">
         <BaseTablePlaceholder
           v-if="!selectedBusLine"
@@ -11,7 +11,9 @@
         />
         <BusStopsTable
           v-else
+          class="h-100"
           @selected="selectBusStop"
+          @toggleOrder="toggleOrder"
           :line="selectedBusLine"
           :stops="selectedBusLineStops"
           :selectedStop="selectedBusStop"
@@ -65,4 +67,20 @@ const emtpyBusStopText = computed(() => {
 const selectBusStop = (stop: IBusStop) => {
   store.dispatch("selectBusStop", stop)
 }
+
+const toggleOrder = () => {
+  store.dispatch("toggleSelectedStopsSortOrder")
+}
 </script>
+
+<style scoped>
+.h-container {
+  max-height: 450px;
+}
+
+@media (min-width: 768px) {
+  .h-md-container {
+    max-height: calc(100vh - 19rem);
+  }
+}
+</style>

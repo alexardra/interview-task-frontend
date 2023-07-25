@@ -47,4 +47,8 @@ table td:hover {
 td.active {
   color: $primary !important;
 }
+
+td {
+  border-bottom-color: $light-bg;
+}
 </style>

@@ -47,4 +47,18 @@ $theme-colors: (
   background-color: $primary-active !important;
 }
 
+.border-dashed {
+  border-style: dashed;
+}
+
+@media (min-width: 768px) {
+  .vh-md-100 {
+    height: 100vh;
+  }
+
+  .overflow-md-hidden {
+    overflow: hidden !important;
+  }
+}
+
 @import "bootstrap";

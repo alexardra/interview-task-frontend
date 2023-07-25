@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="row g-0 d-md-flex flex-md-fill" style="max-height: 675px">
+    <div class="row g-0 d-md-flex flex-md-fill h-container h-md-container">
       <div class="col-md bg-white rounded-1 h-100">
         <template v-if="!isInitialised">
           <div
@@ -12,8 +12,12 @@
           </div>
         </template>
         <template v-else>
-          <BaseSearchBar @changed="filterStops" />
-          <BusStopsTable :stops="filteredBusStops" />
+          <BaseSearchBar @changed="updateQuery" />
+          <BusStopsTable
+            class="h-rest"
+            :stops="filteredBusStops"
+            @click="toggleOrder"
+          />
         </template>
       </div>
     </div>
@@ -49,10 +53,42 @@ watch(
   { immediate: true }
 )
 
-const filterStops = (query: string) => {
+const query = ref("")
+
+const updateQuery = (q: string) => {
+  query.value = q
+  filterStops()
+}
+
+const filterStops = () => {
   /*
    * Abstracting away search - for possibility of future improvement
    */
-  filteredBusStops.value = search(busStops.value, query, (item) => item.name)
+  filteredBusStops.value = search(
+    busStops.value,
+    query.value,
+    (item) => item.name
+  )
+}
+
+const toggleOrder = () => {
+  store.dispatch("toggleStopsSortOrder")
+  filterStops()
 }
 </script>
+
+<style scoped>
+.h-container {
+  max-height: 450px;
+}
+
+@media (min-width: 768px) {
+  .h-md-container {
+    max-height: calc(100vh - 10rem);
+  }
+}
+
+.h-rest {
+  height: calc(100% - 60px);
+}
+</style>

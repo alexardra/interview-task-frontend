@@ -19,7 +19,13 @@ type StateShape = {
   busLineList: number[]
   selectedBusLine: number | null
   selectedBusStop: IBusStop | null
+
+  stopsSortOrder: BusStopSortOrder
+  selectedStopsSortOrder: BusStopSortOrder
 }
+
+const busStopSortOrder = ["desc", "asc"] as const
+type BusStopSortOrder = (typeof busStopSortOrder)[number]
 
 export default createStore({
   state: <StateShape>{
@@ -29,6 +35,9 @@ export default createStore({
 
     selectedBusLine: null,
     selectedBusStop: null,
+
+    stopsSortOrder: "desc",
+    selectedStopsSortOrder: "asc",
   },
   getters: {
     busLines(state) {
@@ -55,7 +64,10 @@ export default createStore({
             name: stopName,
             order,
           } as IBusStop,
-          (a, b) => a.order - b.order
+          (a, b) =>
+            state.selectedStopsSortOrder === "asc"
+              ? a.order - b.order
+              : b.order - a.order
         )
       })
 
@@ -77,7 +89,10 @@ export default createStore({
           sortedPush(
             stops,
             { name: stopName, order: stopData.order } as IBusStop,
-            (a, b) => b.order - a.order
+            (a, b) =>
+              state.stopsSortOrder === "asc"
+                ? a.order - b.order
+                : b.order - a.order
           )
         })
       })
@@ -141,6 +156,13 @@ export default createStore({
     setSelectedBusStop(state, stop: IBusStop) {
       state.selectedBusStop = stop
     },
+    toggleStopsSortOrder(state) {
+      state.stopsSortOrder = state.stopsSortOrder === "asc" ? "desc" : "asc"
+    },
+    toggleSelectedStopsSortOrder(state) {
+      state.selectedStopsSortOrder =
+        state.selectedStopsSortOrder === "asc" ? "desc" : "asc"
+    },
   },
   actions: {
     async init(context) {
@@ -171,6 +193,12 @@ export default createStore({
       if (context.state.selectedBusLine !== null) {
         context.commit("setSelectedBusStop", busStop)
       }
+    },
+    toggleStopsSortOrder(context) {
+      context.commit("toggleStopsSortOrder")
+    },
+    toggleSelectedStopsSortOrder(context) {
+      context.commit("toggleSelectedStopsSortOrder")
     },
   },
 })

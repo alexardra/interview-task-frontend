@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-white rounded-1 d-flex flex-column gap-2 h-100 overflow-y-auto"
-  >
+  <div class="bg-white rounded-1 d-flex flex-column gap-2 overflow-y-auto">
     <h3 v-if="line" class="text-main fs-sm mb-0 px-4 pt-4">
       Bus Line: {{ line }}
     </h3>
@@ -13,7 +11,9 @@
       <template #title>
         <div class="d-flex align-items-center gap-1">
           <span>Bus Stops</span>
-          <SortIcon />
+          <button class="btn btn-plain p-0 lh-1" @click="toggleStopsOrder">
+            <SortIcon />
+          </button>
         </div>
       </template>
     </BaseTable>
@@ -36,6 +36,7 @@ const { line, stops, selectedStop } = toRefs(props)
 
 const emit = defineEmits<{
   (e: "selected", name: IBusStop): void
+  (e: "toggleOrder"): void
 }>()
 
 const rows = computed(() => {
@@ -49,5 +50,9 @@ const selectedIndex = computed(() => {
 
 const selectBusStop = (index: number) => {
   emit("selected", stops.value[index])
+}
+
+const toggleStopsOrder = () => {
+  emit("toggleOrder")
 }
 </script>

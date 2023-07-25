@@ -4,7 +4,7 @@ import BusLinesPage from "@/views/BusLinesPage.vue"
 export const AppRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    name: "BusLines",
+    name: "Bus Lines",
     component: BusLinesPage,
   },
   {
